@@ -4,15 +4,26 @@ $(document).ready(function() {
         window.location.href = "https://www.paypal.com/donate/?business=your-paypal-email@example.com";
     });
 
-    // Simple form validation before submission
-    $("form").submit(function(event) {
-        let name = $("#name").val().trim();
-        let email = $("#email").val().trim();
-        let order = $("#order").val().trim();
+    // Handle form submission with AJAX
+    $("#order-form").submit(function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
 
-        if (name === "" || email === "" || order === "") {
-            alert("Please fill out all fields before submitting.");
-            event.preventDefault(); // Stop form submission
-        }
+        let form = $(this);
+        let formData = form.serialize(); // Get form data as URL-encoded string
+
+        // Send form data to Formspree using AJAX
+        $.ajax({
+            url: form.attr("action"), // Formspree endpoint URL
+            method: "POST",            // HTTP method (POST)
+            data: formData,           // Data to send
+            dataType: "json",         // Expected data format (JSON)
+            success: function(response) {
+                alert("Order sent successfully! We will contact you soon.");
+                form.trigger("reset"); // Reset form fields
+            },
+            error: function() {
+                alert("Error sending order. Please try again.");
+            }
+        });
     });
 });
