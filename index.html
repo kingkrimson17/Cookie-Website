@@ -6,28 +6,37 @@
     <title>Cookie Orders</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
-
     <h1>Welcome to Cookie Orders!</h1>
     <p>Order your favorite cookies below.</p>
 
-    <form action="https://formspree.io/f/xnnjvzed" method="POST">
+    <form id="order-form" action="https://formspree.io/f/xnnjvzed" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         
-        <label for="order">Order Details:</label>
-        <textarea id="order" name="order" required></textarea>
+        <label for="flavors">Choose your cookie:</label>
+        <select id="flavors" name="flavors" required></select>
         
         <button type="submit">Send Order</button>
     </form>
 
     <button id="paypal-button">Buy Now with PayPal</button>
 
-    <script src="script.js"></script>
-
+    <div id="admin-section">
+        <h2>Admin Panel</h2>
+        <input type="password" id="admin-password" placeholder="Enter admin password">
+        <button id="admin-login">Login</button>
+        <div id="admin-controls" style="display: none;">
+            <h3>Manage Cookie Flavors</h3>
+            <input type="text" id="new-flavor" placeholder="Add new flavor">
+            <button id="add-flavor">Add Flavor</button>
+            <ul id="flavor-list"></ul>
+        </div>
+    </div>
 </body>
 </html>
